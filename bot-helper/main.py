@@ -48,8 +48,11 @@ def handler_phone(my_book, list_):
     # return LIST_PHONEBOOK[list_[0]]
     list_rec = my_book.finde_records(list_[0])
     if list_rec is not None:
-        for item in list_rec:
-            print (item)
+        # for item in list_rec:
+        #     print (item)
+        dict_rec = {rec_.name.value: rec_ ** 2 for rec_ in list_rec}
+        copy_book = my_book.copy(dict_rec)
+        return copy_book
 
 def handler_show_all(my_book):
 # def handler_show_all():
