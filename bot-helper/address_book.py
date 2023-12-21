@@ -231,7 +231,8 @@ class AddressBook(UserDict):
                 iter += 1
             if len(for_return) == self.qua_for_iter:
                 break
-        return f"{for_return[0]}\n{for_return[1]}\n"
+        # return for_return
+        return f"{', '.join(i for i in for_return)}\n"
 
     def __iter__(self):
         return self
