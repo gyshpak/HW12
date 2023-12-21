@@ -273,6 +273,24 @@ class AddressBook(UserDict):
                 record.add_phone(j_phone)
             ret_book.add_record(record)
         return ret_book
+    
+    def __copy__(self, **dict_):
+        copy_obj = AddressBook(None)
+        copy_obj.qua_for_iter = copy(self.qua_for_iter)
+        copy_obj.list_for_iter = copy(self.list_for_iter)
+        copy_obj.data = dict_
+        return copy_obj
+    
+    def __str__(self):
+        for record in self:
+            # print(record)
+            return record
+    def __repr__(self):
+        for record in self:
+            # print(record)
+            return record
+        
+
             
 if __name__ == "__main__":
     ###################################        Blok for verification         #################################
@@ -385,8 +403,13 @@ if __name__ == "__main__":
     book = book_from_pickle.load_from_file_pickle(file_name_pickle)
 
     print("\nFrom pickle: \n")
-    for record in book:
-        print(record)
+
+    try:
+        print(book)
+    except:
+        pass
+    # for record in book:
+    #     print(record)
 
 
     # file_name_json = "bot-helper\\book_json.json"
@@ -396,8 +419,8 @@ if __name__ == "__main__":
     # book_from_json = book_from_json.load_from_file_json(file_name_json)
 
     # # print("\nFrom json: \n")
-    # # for record in book_from_json:
-    # #     print(record)
+    # for record in book_from_pickle:
+    #     print(record)
 
 
     # john = book_from_json.find("Jjjjohn")
