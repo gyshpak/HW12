@@ -170,16 +170,18 @@ class Record:
 
 
     def __str__(self):
+        # return f"Contact name:"
+    
         if hasattr(self, "birthday"):
             return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}, birthday: {date.strftime(self.birthday.value, '%d %m %Y')}"
         else:
             return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
         
-    def __repr__(self):
-        if hasattr(self, "birthday"):
-            return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}, 'birthday': '{date.strftime(self.birthday.value, '%Y %m %d')}'"
-        else:
-            return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}"
+    # def __repr__(self):
+    #     if hasattr(self, "birthday"):
+    #         return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}, 'birthday': '{date.strftime(self.birthday.value, '%Y %m %d')}'"
+    #     else:
+    #         return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}"
 
 
 class AddressBook(UserDict):
@@ -209,8 +211,8 @@ class AddressBook(UserDict):
             else:
                 for phones in records.phones:
                     if search in phones.value:
-                        print(records)
-                        # list_rec.append(records)
+                        # print(records)
+                        list_rec.append(records)
                         break
         return list_rec
     
@@ -229,7 +231,7 @@ class AddressBook(UserDict):
                 iter += 1
             if len(for_return) == self.qua_for_iter:
                 break
-        return for_return
+        return f"{for_return[0]}\n{for_return[1]}\n"
 
     def __iter__(self):
         return self
@@ -283,13 +285,7 @@ class AddressBook(UserDict):
     
     def __str__(self):
         for record in self:
-            # print(record)
-            return record
-    def __repr__(self):
-        for record in self:
-            # print(record)
-            return record
-        
+            print(record)
 
             
 if __name__ == "__main__":
@@ -402,12 +398,12 @@ if __name__ == "__main__":
     book_from_pickle = AddressBook()
     book = book_from_pickle.load_from_file_pickle(file_name_pickle)
 
-    print("\nFrom pickle: \n")
-
+    # print("\nFrom pickle: \n")
     try:
         print(book)
     except:
         pass
+    
     # for record in book:
     #     print(record)
 
@@ -426,7 +422,7 @@ if __name__ == "__main__":
     # john = book_from_json.find("Jjjjohn")
     # print(john)
 
-    book_from_pickle.finde_records("80")
+    # book_from_pickle.finde_records("80")
         
 
     # record = book_from_pickle.find("John")
