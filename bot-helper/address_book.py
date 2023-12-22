@@ -173,9 +173,9 @@ class Record:
         # return f"Contact name:"
     
         if hasattr(self, "birthday"):
-            return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}, birthday: {date.strftime(self.birthday.value, '%d %m %Y')}"
+            return f"Contact name: {self.name.value}, phones: {', '.join(p.value for p in self.phones)}, birthday: {date.strftime(self.birthday.value, '%d %m %Y')}"
         else:
-            return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
+            return f"Contact name: {self.name.value}, phones: {', '.join(p.value for p in self.phones)}"
         
     # def __repr__(self):
     #     if hasattr(self, "birthday"):
@@ -232,7 +232,7 @@ class AddressBook(UserDict):
             if len(for_return) == self.qua_for_iter:
                 break
         # return for_return
-        return f"{', '.join(i for i in for_return)}\n"
+        return f"{'; '.join(i for i in for_return)} \n"
 
     def __iter__(self):
         return self
