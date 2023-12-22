@@ -278,15 +278,6 @@ class AddressBook(UserDict):
             ret_book.add_record(record)
         return ret_book
     
-    def __copy__(self, dict_):
-        print("HOHOHO")
-        copy_obj = AddressBook(None)
-        copy_obj.qua_for_iter = copy(self.qua_for_iter)
-        copy_obj.list_for_iter = copy(self.list_for_iter)
-        print(dict_)
-        copy_obj.data = dict_
-        return copy_obj
-    
     def __str__(self):
         for record in self:
             print(record)
@@ -436,13 +427,15 @@ if __name__ == "__main__":
 
 
     john = book_from_json.find("John")
-    print(john)
+    # print(john)
 
     list_rec = book_from_json.finde_records("80")
     
     dict_rec = {rec_.name.value: rec_ for rec_ in list_rec}
     print(type(dict_rec))
-    copy_book = book_from_json.copy(**dict_rec)
+    # copy_book = book_from_json.copy()
+    copy_book = copy(book_from_json)
+    # print(copy_book)
         
 
     # record = book_from_json.find("John")
