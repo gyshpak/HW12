@@ -9,14 +9,14 @@ def input_error(func):
         except ValueError:
             return_data = "Wrong number, repeat please"
         except KeyError:
-            return_data = "Wrong Name, repeat please"
+            return_data = "Wrong Birthday, repeat please"
         except TypeError:
             return_data = "Wrong command, try again"
         return return_data
     return inner
 
 
-def handler_hello(_):
+def handler_hello(my_book, _):
     return "How can I help you?"
 
 def handler_add(my_book, list_):
@@ -25,9 +25,11 @@ def handler_add(my_book, list_):
        record.add_phone(list_[1])
        my_book.add_record(record)
     else:
-        record = book.Record(list_[0].capitalize())
+        if len(list_) == 3:
+            record = book.Record(list_[0].capitalize(),list_[2])
+        else:
+            record = book.Record(list_[0].capitalize())
         record.add_phone(list_[1])
-        print(record)
         my_book.add_record(record)
     return "Command successfully complete"
 
@@ -39,12 +41,13 @@ def handler_change(my_book, list_):
     
 def handler_phone(my_book, list_):
     list_rec = my_book.finde_records(list_[0])
-    if list_rec is not None:
+    if len(list_rec) != 0:
         ret_book = book.AddressBook()
         for rec_ in list_rec:
             ret_book.add_record(rec_)
         return ret_book
-
+    else:
+        return "Contact not found"
 
 def handler_show_all(my_book):
     return my_book

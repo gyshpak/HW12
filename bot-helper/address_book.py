@@ -34,7 +34,7 @@ class Phone(Field):
             norm_phone = self.normalis_phone(new_value)
             self.__value =  norm_phone
         else:
-            raise Exception
+            raise ValueError
  
     def is_valid_phone(self, value):
         if value != "":
@@ -79,10 +79,14 @@ class Birthday(Field):
             if norm_birthday != "":
                 self.__value = norm_birthday
             else:
-                raise Exception
+                raise KeyError
+        else:
+            print("Wrong Birthdat")
+            raise KeyError
 
     def is_valid_birthday(self, value):
         if value != "":
+            # print(value)
             if match(r"^\d{2}['\s'|\-|'.'|:]{1}\d{2}[\s|\-|'.'|:]{1}\d{4}$|^\d{4}['\s'|\-|'.'|:]{1}\d{2}[\s|\-|'.'|:]{1}\d{2}$", value) != None:
                 return True
             else:
@@ -95,9 +99,15 @@ class Birthday(Field):
                     .replace(":",",")
         date_birthday = norm_birthday.split(",")
         if len(date_birthday[0]) == 4:
-            return date(int(date_birthday[0]), int(date_birthday[1]), int(date_birthday[2]))
+            try:
+                return date(int(date_birthday[0]), int(date_birthday[1]), int(date_birthday[2]))
+            except:
+                raise KeyError
         else:
-            return date(int(date_birthday[2]), int(date_birthday[1]), int(date_birthday[0]))
+            try:
+                return date(int(date_birthday[2]), int(date_birthday[1]), int(date_birthday[0]))
+            except:
+                raise KeyError
         
     def __sub__(self, other):
         try:
@@ -117,21 +127,17 @@ class Birthday(Field):
 
 class Record:
     def __init__(self, name, birthday = None):
+        if birthday is not None:
+            self.birthday = Birthday(birthday)
         self.name = Name(name)
         self.phones = []
-        try:
-            self.birthday = Birthday(birthday)
-        except:
-            pass
 
     def add_phone(self, phone):
-        try:
-            phone_obj = Phone(phone)
-        except:
-            pass
-        else:
-            if phone_obj not in self.phones:
-                    self.phones.append(phone_obj)
+        phone_obj = Phone(phone)
+        if phone_obj not in self.phones:
+                self.phones.append(phone_obj)
+
+
 
     def remove_phone(self, phone):
         try:
@@ -170,18 +176,17 @@ class Record:
 
 
     def __str__(self):
-        # return f"Contact name:"
     
         if hasattr(self, "birthday"):
             return f"Contact name: {self.name.value}, phones: {', '.join(p.value for p in self.phones)}, birthday: {date.strftime(self.birthday.value, '%d %m %Y')}"
         else:
             return f"Contact name: {self.name.value}, phones: {', '.join(p.value for p in self.phones)}"
         
-    def __repr__(self):
-        if hasattr(self, "birthday"):
-            return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}, 'birthday': '{date.strftime(self.birthday.value, '%Y %m %d')}'"
-        else:
-            return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}"
+    # def __repr__(self):
+    #     if hasattr(self, "birthday"):
+    #         return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}, 'birthday': '{date.strftime(self.birthday.value, '%Y %m %d')}'"
+    #     else:
+    #         return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}"
 
 
 class AddressBook(UserDict):
