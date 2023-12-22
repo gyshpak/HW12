@@ -177,11 +177,11 @@ class Record:
         else:
             return f"Contact name: {self.name.value}, phones: {', '.join(p.value for p in self.phones)}"
         
-    # def __repr__(self):
-    #     if hasattr(self, "birthday"):
-    #         return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}, 'birthday': '{date.strftime(self.birthday.value, '%Y %m %d')}'"
-    #     else:
-    #         return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}"
+    def __repr__(self):
+        if hasattr(self, "birthday"):
+            return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}, 'birthday': '{date.strftime(self.birthday.value, '%Y %m %d')}'"
+        else:
+            return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}"
 
 
 class AddressBook(UserDict):
@@ -202,7 +202,7 @@ class AddressBook(UserDict):
         except:
             None
     
-    def finde_records(self,search = None):
+    def finde_records(self, search = None):
         list_rec = []
         for name, records in self.data.items():
             if search.lower() in name.lower():
@@ -213,6 +213,7 @@ class AddressBook(UserDict):
                     if search in phones.value:
                         # print(records)
                         list_rec.append(records)
+                        # print("HOHOHO")
                         break
         return list_rec
     

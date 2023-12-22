@@ -50,8 +50,11 @@ def handler_phone(my_book, list_):
     if list_rec is not None:
         # for item in list_rec:
         #     print (item)
-        dict_rec = {rec_.name.value: rec_ ** 2 for rec_ in list_rec}
+        print(list_rec)
+        dict_rec = {rec_.name.value: rec_ for rec_ in list_rec}
+        # print(type(dict_rec))
         copy_book = my_book.copy(dict_rec)
+        # print(type(copy_book))
         return copy_book
 
 def handler_show_all(my_book):
@@ -115,7 +118,10 @@ def main():
         ret_rezault = parser_command(my_book, command)
         # ret_rezault = parser_command(command)
         if ret_rezault:
-            print(ret_rezault)
+            try:
+                print(ret_rezault)
+            except:
+                pass
             if ret_rezault == "Good bye!":
                 # my_book.save_to_file_pickle(file_name_p)
                 # my_book.save_to_file_json(file_name_j)
