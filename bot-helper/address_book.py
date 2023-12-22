@@ -6,6 +6,17 @@ import pickle
 import json
 
 
+class WrongNomber(Exception):
+    pass
+
+class WrongBirthday(Exception):
+    pass
+
+class ExistsPhone(Exception):
+    # def __init__(self, value):
+    #     self.value = value
+    pass
+    
 class Field:
     def __init__(self, value):
         self.value = value
@@ -34,7 +45,7 @@ class Phone(Field):
             norm_phone = self.normalis_phone(new_value)
             self.__value =  norm_phone
         else:
-            raise ValueError
+            raise WrongNomber
  
     def is_valid_phone(self, value):
         if value != "":
@@ -79,10 +90,10 @@ class Birthday(Field):
             if norm_birthday != "":
                 self.__value = norm_birthday
             else:
-                raise KeyError
+                raise WrongBirthday
         else:
             print("Wrong Birthdat")
-            raise KeyError
+            raise WrongBirthday
 
     def is_valid_birthday(self, value):
         if value != "":
@@ -136,8 +147,6 @@ class Record:
         phone_obj = Phone(phone)
         if phone_obj not in self.phones:
                 self.phones.append(phone_obj)
-
-
 
     def remove_phone(self, phone):
         try:
@@ -200,7 +209,7 @@ class AddressBook(UserDict):
         for key, record in self.data.items():
             if key == name:
                 return(record)
-
+    
     def delete(self, name):
         try:
             self.data.pop(name)
@@ -211,17 +220,22 @@ class AddressBook(UserDict):
         list_rec = []
         for name, records in self.data.items():
             if search.lower() in name.lower():
-                # print(records)
                 list_rec.append(records)
             else:
                 for phones in records.phones:
                     if search in phones.value:
-                        # print(records)
                         list_rec.append(records)
-                        # print("HOHOHO")
                         break
         return list_rec
     
+    def exists_phone(self, phone = None):
+        if phone is not None:
+            phone_ = Phone(phone)
+            for record_ in self.data.values():
+                if phone_ in record_.phones:
+                    # raise ExistsPhone(phone_)
+                    raise ExistsPhone
+
     def __next__(self):
         if len(self.list_for_iter) == len(self.data):
             self.list_for_iter.clear()
