@@ -401,11 +401,23 @@ if __name__ == "__main__":
     book = book_from_pickle.load_from_file_pickle(file_name_pickle)
 
     # print("\nFrom pickle: \n")
-    try:
-        print(book)
-    except:
-        pass
-    
+
+############# так працює   №№№№№№№№№№№
+    # for record in book:       
+    #     print(record)
+    #     print("\n")
+
+############# так працює   №№№№№№№№№№№
+    # try:
+    #     print(book)
+    # except:
+    #     pass
+
+############# так  працює, але з помилкою   №№№№№№№№№№№
+    print(book)
+
+
+
     # for record in book:
     #     print(record)
 
