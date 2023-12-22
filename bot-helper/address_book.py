@@ -278,10 +278,12 @@ class AddressBook(UserDict):
             ret_book.add_record(record)
         return ret_book
     
-    def __copy__(self, **dict_):
+    def __copy__(self, dict_):
+        print("HOHOHO")
         copy_obj = AddressBook(None)
         copy_obj.qua_for_iter = copy(self.qua_for_iter)
         copy_obj.list_for_iter = copy(self.list_for_iter)
+        print(dict_)
         copy_obj.data = dict_
         return copy_obj
     
@@ -394,11 +396,11 @@ if __name__ == "__main__":
     ########################  for  12  HW   #####################################
 
 
-    file_name_pickle = "bot-helper\\book_pickle.bin"
-    # book.save_to_file_pickle(file_name_pickle)
+    # file_name_pickle = "bot-helper\\book_pickle.bin"
+    # # book.save_to_file_pickle(file_name_pickle)
 
-    book_from_pickle = AddressBook()
-    book = book_from_pickle.load_from_file_pickle(file_name_pickle)
+    # book_from_pickle = AddressBook()
+    # book = book_from_pickle.load_from_file_pickle(file_name_pickle)
 
     # print("\nFrom pickle: \n")
 
@@ -414,7 +416,7 @@ if __name__ == "__main__":
     #     pass
 
 ############# так  працює, але з помилкою   №№№№№№№№№№№
-    print(book)
+    # print(book)
 
 
 
@@ -422,24 +424,28 @@ if __name__ == "__main__":
     #     print(record)
 
 
-    # file_name_json = "bot-helper\\book_json.json"
-    # # book.save_to_file_json(file_name_json)
+    file_name_json = "bot-helper\\book_json.json"
+    # book.save_to_file_json(file_name_json)
 
-    # book_from_json = AddressBook()
-    # book_from_json = book_from_json.load_from_file_json(file_name_json)
+    book_from_json = AddressBook()
+    book_from_json = book_from_json.load_from_file_json(file_name_json)
 
     # # print("\nFrom json: \n")
     # for record in book_from_pickle:
     #     print(record)
 
 
-    # john = book_from_json.find("Jjjjohn")
-    # print(john)
+    john = book_from_json.find("John")
+    print(john)
 
-    # book_from_pickle.finde_records("80")
+    list_rec = book_from_json.finde_records("80")
+    
+    dict_rec = {rec_.name.value: rec_ for rec_ in list_rec}
+    print(type(dict_rec))
+    copy_book = book_from_json.copy(**dict_rec)
         
 
-    # record = book_from_pickle.find("John")
+    # record = book_from_json.find("John")
     # record.add_phone("0674626244")
     # book_from_pickle.add_record(record)
     # print(record)

@@ -50,7 +50,7 @@ def handler_phone(my_book, list_):
     if list_rec is not None:
         # for item in list_rec:
         #     print (item)
-        print(list_rec)
+        print(type(list_rec))
         dict_rec = {rec_.name.value: rec_ for rec_ in list_rec}
         # print(type(dict_rec))
         copy_book = my_book.copy(dict_rec)
