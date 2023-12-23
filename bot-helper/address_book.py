@@ -16,6 +16,9 @@ class ExistsPhone(Exception):
     # def __init__(self, value):
     #     self.value = value
     pass
+
+class UserNotFound(Exception):
+    pass
     
 class Field:
     def __init__(self, value):
@@ -211,10 +214,14 @@ class AddressBook(UserDict):
                 return(record)
     
     def delete(self, name):
+        print(name)
         try:
             self.data.pop(name)
-        except:
-            None
+        except Exception:
+            print("Error")
+            return f"User {name} not found"
+        
+            # raise UserNotFound
     
     def finde_records(self, search = None):
         list_rec = []

@@ -43,7 +43,7 @@ def handler_change(my_book, list_):
         record.edit_phone(list_[1], list_[2])
     return "Command successfully complete"
     
-def handler_show_all(my_book):
+def handler_show_all(my_book, _ = None):
     return my_book
 
 def handler_exit(my_book, _ = None):
@@ -58,8 +58,32 @@ def handler_finde(my_book, list_):
         return ret_book
     else:
         return "Contact not found"
+def handler_delete_phone(my_book, list_):
+    for name_, record_ in my_book.data.items():
+        if list_[0].capitalize() == name_:
+            record_.remove_phone(list_[1])
+
+def handler_delete_user(my_book, list_):
+    print (list_[0])
+    my_book.delete(list_[0].capitalize())
+
+def handler_help(my_book, _ = None):
+    help_string = '''
+                Hellow, you can us next command with format:\n
+                help - for help\n
+                hello - for hello\n
+                add user_name phone(10 or 13 number) [birthday] - for add user\n
+                change user_name phone_from_chandge phone_to_chandge f-r chandge phone\n
+                show all - for show all records\n
+                good bye | close | exit - for exit\n
+                finde some_letters | some_nombers - for finde record by name or phone\n
+                delete phone nameuser phone - for delete phone from user\n
+                delete user user_name - for delete user from address book
+                '''
+    return help_string
 
 NAME_COMMANDS = {
+    "help": handler_help,
     "hello": handler_hello,
     "add": handler_add,
     "change": handler_change,
@@ -67,7 +91,9 @@ NAME_COMMANDS = {
     "goodbye": handler_exit,
     "close": handler_exit,
     "exit": handler_exit,
-    "finde": handler_finde
+    "finde": handler_finde,
+    "deletephone": handler_delete_phone,
+    "deleteuser": handler_delete_user
 
 }
 
@@ -85,7 +111,8 @@ def parser_command(my_book, command):
         return ret_rezault
     elif len(list_command) > 1 and list_command[0]+list_command[1] in NAME_COMMANDS:
         any_command = defs_commands(list_command[0]+list_command[1])
-        ret_rezault = any_command(my_book)
+        # ret_rezault = any_command(my_book)
+        ret_rezault = any_command(my_book, list_command[2:])
         return ret_rezault
     else:
         any_command = defs_commands()
