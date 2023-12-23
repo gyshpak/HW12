@@ -1,25 +1,16 @@
 from collections import UserDict
-from copy import copy, deepcopy
 from datetime import date
 from re import match
 import pickle
 import json
 
 
-class WrongNomber(Exception):
-    pass
-
 class WrongBirthday(Exception):
     pass
-
 class ExistsPhone(Exception):
-    # def __init__(self, value):
-    #     self.value = value
     pass
 
-class UserNotFound(Exception):
-    pass
-    
+
 class Field:
     def __init__(self, value):
         self.value = value
@@ -48,7 +39,7 @@ class Phone(Field):
             norm_phone = self.normalis_phone(new_value)
             self.__value =  norm_phone
         else:
-            raise WrongNomber
+            raise ValueError
  
     def is_valid_phone(self, value):
         if value != "":
@@ -95,12 +86,10 @@ class Birthday(Field):
             else:
                 raise WrongBirthday
         else:
-            print("Wrong Birthdat")
             raise WrongBirthday
 
     def is_valid_birthday(self, value):
         if value != "":
-            # print(value)
             if match(r"^\d{2}['\s'|\-|'.'|:]{1}\d{2}[\s|\-|'.'|:]{1}\d{4}$|^\d{4}['\s'|\-|'.'|:]{1}\d{2}[\s|\-|'.'|:]{1}\d{2}$", value) != None:
                 return True
             else:
@@ -116,28 +105,26 @@ class Birthday(Field):
             try:
                 return date(int(date_birthday[0]), int(date_birthday[1]), int(date_birthday[2]))
             except:
-                raise KeyError
+                raise WrongBirthday
         else:
             try:
                 return date(int(date_birthday[2]), int(date_birthday[1]), int(date_birthday[0]))
             except:
-                raise KeyError
+                raise WrongBirthday
         
     def __sub__(self, other):
-        try:
-            birthday_month = self.value.month
-            birthday_day = self.value.day
-            my_birthday = date(other.value.year, birthday_month, birthday_day)
-            date_today = other.value
-            if my_birthday < date_today:
-                my_birthday = my_birthday.replace(year=date_today.year + 1)
-            day_to_birthday = my_birthday - date_today
-            return day_to_birthday.days
-        except AttributeError:
-            return None
+        birthday_month = self.value.month
+        birthday_day = self.value.day
+        my_birthday = date(other.value.year, birthday_month, birthday_day)
+        date_today = other.value
+        if my_birthday < date_today:
+            my_birthday = my_birthday.replace(year=date_today.year + 1)
+        day_to_birthday = my_birthday - date_today
+        return day_to_birthday.days
     
-    def __repr__(self):
-        return self.value.strftime("%Y %m %d")
+    def __str__(self):
+        return self.value.strftime("%d.%m.%Y")
+    
 
 class Record:
     def __init__(self, name, birthday = None):
@@ -152,54 +139,32 @@ class Record:
                 self.phones.append(phone_obj)
 
     def remove_phone(self, phone):
-        try:
-            search_phone = Phone(phone)
-        except:
-            pass
-        else:
-            for item in self.phones:
-                if item == search_phone:
-                    self.phones.remove(item)
+        search_phone = Phone(phone)
+        self.phones.remove(search_phone)
 
     def edit_phone(self, phone, new_phone):
         search_phone = Phone(phone)
         chandge_phone = Phone(new_phone)
-        for item in self.phones:
-            if item == search_phone:
-                index = self.phones.index(item)
-                self.phones[index] = chandge_phone
+        index = self.phones.index(search_phone)
+        self.phones[index] = chandge_phone
     
     def find_phone(self, phone):
-        try:
-            search_phone = Phone(phone)
-        except:
-            pass
-        else:
-            for item in self.phones:
-                if item == search_phone:
-                    return item
+        search_phone = Phone(phone)
+        for item in self.phones:
+            if item == search_phone:
+                return item
                 
     def days_to_birthday(self):
         today = Birthday(date.today().strftime("%Y %m %d"))
-        try:
-            return self.birthday - today
-        except:
-            return None
-
+        return self.birthday - today
 
     def __str__(self):
     
         if hasattr(self, "birthday"):
-            return f"Contact name: {self.name.value}, phones: {', '.join(p.value for p in self.phones)}, birthday: {date.strftime(self.birthday.value, '%d %m %Y')}"
+            return f"Contact name: {self.name.value}, phones: {', '.join(p.value for p in self.phones)}, birthday: {date.strftime(self.birthday.value, '%d.%m.%Y')}"
         else:
             return f"Contact name: {self.name.value}, phones: {', '.join(p.value for p in self.phones)}"
         
-    # def __repr__(self):
-    #     if hasattr(self, "birthday"):
-    #         return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}, 'birthday': '{date.strftime(self.birthday.value, '%Y %m %d')}'"
-    #     else:
-    #         return f"{'{'}'phones': '{', '.join(p.value for p in self.phones)}'{'}'}"
-
 
 class AddressBook(UserDict):
     qua_for_iter = 2
@@ -209,19 +174,14 @@ class AddressBook(UserDict):
         self.data[record.name.value] = record
 
     def find(self, name):
-        for key, record in self.data.items():
-            if key == name:
-                return(record)
+        record = self.data.get(name)
+        if record is not None:
+            return record
+        else:
+            raise KeyError
     
     def delete(self, name):
-        print(name)
-        try:
-            self.data.pop(name)
-        except Exception:
-            print("Error")
-            return f"User {name} not found"
-        
-            # raise UserNotFound
+        self.data.pop(name)
     
     def finde_records(self, search = None):
         list_rec = []
@@ -240,7 +200,6 @@ class AddressBook(UserDict):
             phone_ = Phone(phone)
             for record_ in self.data.values():
                 if phone_ in record_.phones:
-                    # raise ExistsPhone(phone_)
                     raise ExistsPhone
 
     def __next__(self):
@@ -310,6 +269,8 @@ class AddressBook(UserDict):
 
             
 if __name__ == "__main__":
+    pass
+
     ###################################        Blok for verification         #################################
 
     # # Створення нової адресної книги
@@ -441,27 +402,22 @@ if __name__ == "__main__":
     #     print(record)
 
 
-    file_name_json = "bot-helper\\book_json.json"
-    # book.save_to_file_json(file_name_json)
+    # file_name_json = "bot-helper\\book_json.json"
+    # # book.save_to_file_json(file_name_json)
 
-    book_from_json = AddressBook()
-    book_from_json = book_from_json.load_from_file_json(file_name_json)
+    # book_from_json = AddressBook()
+    # book_from_json = book_from_json.load_from_file_json(file_name_json)
 
-    # # print("\nFrom json: \n")
-    # for record in book_from_pickle:
-    #     print(record)
+    # # # print("\nFrom json: \n")
+    # # for record in book_from_pickle:
+    # #     print(record)
 
 
-    john = book_from_json.find("John")
-    # print(john)
+    # john = book_from_json.find("John")
+    # # print(john)
 
-    list_rec = book_from_json.finde_records("80")
+    # list_rec = book_from_json.finde_records("80")
     
-    dict_rec = {rec_.name.value: rec_ for rec_ in list_rec}
-    print(type(dict_rec))
-    # copy_book = book_from_json.copy()
-    copy_book = copy(book_from_json)
-    # print(copy_book)
         
 
     # record = book_from_json.find("John")
