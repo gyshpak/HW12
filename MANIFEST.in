@@ -1,0 +1,2 @@
+include bot-helper\book_pickle.bin
+include bot-helper\book_json.book_json

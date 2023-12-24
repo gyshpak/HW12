@@ -122,7 +122,6 @@ def parser_command(my_book, command):
         return ret_rezault
     elif len(list_command) > 1 and list_command[0]+list_command[1] in NAME_COMMANDS:
         any_command = defs_commands(list_command[0]+list_command[1])
-        # ret_rezault = any_command(my_book)
         ret_rezault = any_command(my_book, list_command[2:])
         return ret_rezault
     else:
@@ -131,12 +130,12 @@ def parser_command(my_book, command):
 
 
 def main():
-    # file_name_p = "bot-helper\\book_pickle.bin"
-    file_name_j = "bot-helper\\book_json.json"
-    # my_book_p = book.AddressBook()
-    my_book_j = book.AddressBook()
-    # my_book = my_book_p.load_from_file_pickle(file_name_p) 
-    my_book = my_book_j.load_from_file_json(file_name_j)
+    file_name_p = "bot-helper\\book_pickle.bin"
+    # file_name_j = "bot-helper\\book_json.json"
+    my_book_p = book.AddressBook()
+    # my_book_j = book.AddressBook()
+    my_book = my_book_p.load_from_file_pickle(file_name_p) 
+    # my_book = my_book_j.load_from_file_json(file_name_j)
     while True:
         command = input("please enter command ").lower()
         ret_rezault = parser_command(my_book, command)
@@ -146,7 +145,7 @@ def main():
             except:
                 pass
             if ret_rezault == "Good bye!":
-                # my_book.save_to_file_pickle(file_name_p)
+                my_book.save_to_file_pickle(file_name_p)
                 # my_book.save_to_file_json(file_name_j)
                 exit()
 
