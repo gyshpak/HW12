@@ -78,7 +78,7 @@ def handler_next_birthday(my_book, list_):
     return f"Next birthday for user {list_[0].capitalize()} after {days} days"
 
 
-def handler_help(my_book, _ = None):
+def handler_help(my_book = None, _ = None):
     help_string = '''
                 Hellow, you can us next command with format:\n
                 help - for help\n
@@ -130,6 +130,7 @@ def parser_command(my_book, command):
 
 
 def main():
+    print(handler_help())
     # file_name_p = "bot_helper\\book_pickle.bin"
     file_name_j = "bot_helper\\book_json.json"
     # my_book_p = book.AddressBook()
