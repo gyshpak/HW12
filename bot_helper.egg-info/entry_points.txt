@@ -1,0 +1,2 @@
+[console_scripts]
+bot-helper = bot_helper.main:main
