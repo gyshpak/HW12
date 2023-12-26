@@ -1,4 +1,4 @@
-import address_book as book
+import bot_helper.address_book as book
 
 def input_error(func):
     def inner(my_book, val):

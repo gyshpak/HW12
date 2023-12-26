@@ -9,6 +9,5 @@ setup(
     license='MIT',
     include_package_data=True,
     packages=find_namespace_packages(),
-    # packages=['bot_helper'],
     entry_points={'console_scripts': ['bot-helper = bot_helper.main:main']}
 )

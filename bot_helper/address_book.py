@@ -42,8 +42,9 @@ class Phone(Field):
             raise ValueError
  
     def is_valid_phone(self, value):
-        if value != "":
-            if match(r"^[\+]?3?8?[\s]?\(?0\d{2}?\)?[\s]?\d{3}[\s|-]?\d{2}[\s|-]?\d{2}$", value) != None:
+        if  value!= "":
+            # if match(r"^[\+]?3?8?[\s]?\(?0\d{2}?\)?[\s]?\d{3}[\s|-]?\d{2}[\s|-]?\d{2}$", value) != None:
+            if match(r"^[\+]?3?8?[\s]?\(?{3}?\)?[\s]?\d{3}[\s|-]?\d{2}[\s|-]?\d{2}$", value) != None:
                 return True
             else:
                 return False
