@@ -90,10 +90,19 @@ def handler_help(my_book = None, _ = None):
                 finde some_letters | some_nombers - for finde record by name or phone\n
                 delete phone user_name phone - for delete phone from user\n
                 delete user user_name - for delete user from address book
+
+                variation format for telefon number:
+                +38(055)111-22-33
+                38(055)111-22-34
+                8(055)111-22-35
+                (055)111-22-36
+                055111-22-37
+                and all variant without "-"
                 '''
     return help_string
 
 NAME_COMMANDS = {
+
     "help": handler_help,
     "hello": handler_hello,
     "add": handler_add,
