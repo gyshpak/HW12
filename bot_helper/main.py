@@ -150,10 +150,10 @@ def main():
         command = input("please enter command ").lower()
         ret_rezault = parser_command(my_book, command)
         if ret_rezault:
-            try:
-                print(ret_rezault)
-            except:
-                pass
+            # try:
+            print(ret_rezault)
+            # except:
+                # pass
             if ret_rezault == "Good bye!":
                 # my_book.save_to_file_pickle(file_name_p)
                 my_book.save_to_file_json(file_name_j)
