@@ -83,13 +83,13 @@ def handler_help(my_book = None, _ = None):
                 Hellow, you can us next command with format:\n
                 help - for help\n
                 hello - for hello\n
-                add user_name phone(10 or 13 number) [birthday] - for add user, if user is exist will be added phone to user\n
-                change user_name phone_from_chandge phone_to_chandge - for chandge phone\n
+                add <user_name> <phone(10 or 13 number)> [birthday] - for add user, if user is exist will be added phone to user\n
+                change <user_name> <phone_from_chandge> <phone_to_chandge> - for chandge phone\n
                 show all - for show all records\n
                 good bye | close | exit - for exit\n
-                find some_letters | some_nombers - for find record by name or phone\n
-                delete phone user_name phone - for delete phone from user\n
-                delete user user_name - for delete user from address book
+                find <some_letters> | <some_nombers> - for find record by name or phone\n
+                delete phone <user_name> <phone> - for delete phone from user\n
+                delete user <user_name> - for delete user from address book
 
                 variation format for telefon number:
                 +38(055)111-22-33
