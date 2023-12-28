@@ -52,7 +52,7 @@ def handler_show_all(my_book, _ = None):
 def handler_exit(my_book, _ = None):
     return "Good bye!"
 
-def handler_finde(my_book, list_):
+def handler_find(my_book, list_):
     list_rec = my_book.finde_records(list_[0].capitalize())
     if len(list_rec) != 0:
         ret_book = book.AddressBook()
@@ -87,7 +87,7 @@ def handler_help(my_book = None, _ = None):
                 change user_name phone_from_chandge phone_to_chandge - for chandge phone\n
                 show all - for show all records\n
                 good bye | close | exit - for exit\n
-                finde some_letters | some_nombers - for finde record by name or phone\n
+                find some_letters | some_nombers - for find record by name or phone\n
                 delete phone user_name phone - for delete phone from user\n
                 delete user user_name - for delete user from address book
 
@@ -111,7 +111,7 @@ NAME_COMMANDS = {
     "goodbye": handler_exit,
     "close": handler_exit,
     "exit": handler_exit,
-    "finde": handler_finde,
+    "find": handler_find,
     "deletephone": handler_delete_phone,
     "deleteuser": handler_delete_user,
     "nextbirthday": handler_next_birthday
