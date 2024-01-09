@@ -1,4 +1,6 @@
-import bot_helper.address_book as book
+# from pathlib import Path
+# import bot_helper.address_book as book
+import address_book as book
 
 def input_error(func):
     def inner(my_book, val):
@@ -142,6 +144,7 @@ def main():
     print(handler_help())
     # file_name_p = "bot_helper\\book_pickle.bin"
     file_name_j = "bot_helper\\book_json.json"
+    # file_name_j = Path("E:\pyton_proj\Go-IT\\bot_helper\\bot_helper\\book_json.json")
     # my_book_p = book.AddressBook()
     my_book_j = book.AddressBook()
     # my_book = my_book_p.load_from_file_pickle(file_name_p) 

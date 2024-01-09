@@ -1,2 +1,2 @@
-global-include bot_helper/book_json.json
-global-include bot_helper/book_pickle.bin
+include bot_helper/book_json.json
+include bot_helper/book_pickle.bin
