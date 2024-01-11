@@ -7,7 +7,6 @@ setup.py
 .git/config
 .git/description
 .git/index
-.git/packed-refs
 .git/hooks/applypatch-msg.sample
 .git/hooks/commit-msg.sample
 .git/hooks/fsmonitor-watchman.sample
@@ -20,12 +19,10 @@ setup.py
 .git/hooks/pre-receive.sample
 .git/hooks/prepare-commit-msg.sample
 .git/hooks/push-to-checkout.sample
-.git/hooks/sendemail-validate.sample
 .git/hooks/update.sample
 .git/info/exclude
 .git/logs/HEAD
 .git/logs/refs/heads/main
-.git/logs/refs/remotes/origin/HEAD
 .git/logs/refs/remotes/origin/main
 .git/objects/06/8219dc7cf18703515d4433e88bb39eaca90903
 .git/objects/09/51d37b41af8f3d8a243e42b93d8451d2631a3a
@@ -92,14 +89,7 @@ setup.py
 .git/objects/f9/5148f6a320a3d7416c7c4603e1aa6b64ce3b55
 .git/objects/fa/1b8c073925498d3098048a31864a10bc556ab9
 .git/objects/fa/82becb0403ac18de82003aa42204937e5cb634
-.git/objects/pack/pack-583e331554201eab6813d4ff8c590629f1465ff3.idx
-.git/objects/pack/pack-583e331554201eab6813d4ff8c590629f1465ff3.pack
-.git/objects/pack/pack-583e331554201eab6813d4ff8c590629f1465ff3.rev
-.git/objects/pack/pack-84c24913bc306a277fcefd0b901fbe45751d9bc1.idx
-.git/objects/pack/pack-84c24913bc306a277fcefd0b901fbe45751d9bc1.pack
-.git/objects/pack/pack-84c24913bc306a277fcefd0b901fbe45751d9bc1.rev
 .git/refs/heads/main
-.git/refs/remotes/origin/HEAD
 .git/refs/remotes/origin/main
 bot_helper/__init__.py
 bot_helper/address_book.py

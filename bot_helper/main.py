@@ -1,4 +1,6 @@
-import bot_helper.address_book as book
+# from pathlib import Path
+# import bot_helper.address_book as book
+import address_book as book
 
 def input_error(func):
     def inner(my_book, val):
@@ -52,7 +54,7 @@ def handler_show_all(my_book, _ = None):
 def handler_exit(my_book, _ = None):
     return "Good bye!"
 
-def handler_finde(my_book, list_):
+def handler_find(my_book, list_):
     list_rec = my_book.finde_records(list_[0].capitalize())
     if len(list_rec) != 0:
         ret_book = book.AddressBook()
@@ -83,13 +85,13 @@ def handler_help(my_book = None, _ = None):
                 Hellow, you can us next command with format:\n
                 help - for help\n
                 hello - for hello\n
-                add user_name phone(10 or 13 number) [birthday] - for add user, if user is exist will be added phone to user\n
-                change user_name phone_from_chandge phone_to_chandge - for chandge phone\n
+                add <user_name> <phone(10 or 13 number)> [birthday] - for add user, if user is exist will be added phone to user\n
+                change <user_name> <phone_from_chandge> <phone_to_chandge> - for chandge phone\n
                 show all - for show all records\n
                 good bye | close | exit - for exit\n
-                finde some_letters | some_nombers - for finde record by name or phone\n
-                delete phone user_name phone - for delete phone from user\n
-                delete user user_name - for delete user from address book
+                find <some_letters> | <some_nombers> - for find record by name or phone\n
+                delete phone <user_name> <phone> - for delete phone from user\n
+                delete user <user_name> - for delete user from address book
 
                 variation format for telefon number:
                 +38(055)111-22-33
@@ -111,7 +113,7 @@ NAME_COMMANDS = {
     "goodbye": handler_exit,
     "close": handler_exit,
     "exit": handler_exit,
-    "finde": handler_finde,
+    "find": handler_find,
     "deletephone": handler_delete_phone,
     "deleteuser": handler_delete_user,
     "nextbirthday": handler_next_birthday
@@ -142,6 +144,7 @@ def main():
     print(handler_help())
     # file_name_p = "bot_helper\\book_pickle.bin"
     file_name_j = "bot_helper\\book_json.json"
+    # file_name_j = Path("E:\pyton_proj\Go-IT\\bot_helper\\bot_helper\\book_json.json")
     # my_book_p = book.AddressBook()
     my_book_j = book.AddressBook()
     # my_book = my_book_p.load_from_file_pickle(file_name_p) 
@@ -150,10 +153,7 @@ def main():
         command = input("please enter command ").lower()
         ret_rezault = parser_command(my_book, command)
         if ret_rezault:
-            try:
-                print(ret_rezault)
-            except:
-                pass
+            print(ret_rezault)
             if ret_rezault == "Good bye!":
                 # my_book.save_to_file_pickle(file_name_p)
                 my_book.save_to_file_json(file_name_j)

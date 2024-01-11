@@ -265,8 +265,10 @@ class AddressBook(UserDict):
         return ret_book
     
     def __str__(self):
+        ret_list = ""
         for record in self:
-            print(record)
+            ret_list += str(record)
+        return ret_list
 
             
 if __name__ == "__main__":
@@ -402,12 +404,14 @@ if __name__ == "__main__":
     # for record in book:
     #     print(record)
 
-
+    # file_name_json = "book_json.json"
     # file_name_json = "bot-helper\\book_json.json"
-    # # book.save_to_file_json(file_name_json)
+    # # # book.save_to_file_json(file_name_json)
 
     # book_from_json = AddressBook()
     # book_from_json = book_from_json.load_from_file_json(file_name_json)
+
+    # print(book_from_json)
 
     # # # print("\nFrom json: \n")
     # # for record in book_from_pickle:
@@ -425,3 +429,12 @@ if __name__ == "__main__":
     # record.add_phone("0674626244")
     # book_from_pickle.add_record(record)
     # print(record)
+
+
+    # file_name_j = "bot_helper\\book_json.json"
+    # # my_book_p = book.AddressBook()
+    # my_book_j = AddressBook()
+    # # my_book = my_book_p.load_from_file_pickle(file_name_p) 
+    # my_book_j = my_book_j.load_from_file_json(file_name_j)
+
+    # print(my_book_j)
