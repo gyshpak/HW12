@@ -279,13 +279,13 @@ if __name__ == "__main__":
     # # Створення нової адресної книги
     # book = AddressBook()
 
-    # # # Створення запису для John
-    # john_record = Record("John", "17 12 1975")
-    # john_record.add_phone("023 456 78 90")
-    # john_record.add_phone("023 456 78 91")
+    # # Створення запису для John
+    # john_record = Record("John", "17.12.1975")
+    # john_record.add_phone("0234567890")
+    # john_record.add_phone("0234567891")
     # john_record.add_phone("(055)555-55-55")
-    # john_record.add_phone("(055) 555-55-")
-    # # print(john_record.days_to_birthday())
+    # john_record.add_phone("(055)555-55-")
+    # print(john_record.days_to_birthday())
 
     # # # # Додавання запису John до адресної книги
     # book.add_record(john_record)
@@ -293,7 +293,7 @@ if __name__ == "__main__":
     # # # Створення запису для Jorjy
     # # # Додавання запису Jorjy до адресної книги
     # jorjy_record = Record("Jorjy", "01.01.1980")
-    # jorjy_record.add_phone("38 088 888 88 88")
+    # jorjy_record.add_phone("380888888888")
     # book.add_record(jorjy_record)
     # # print(jorjy_record.days_to_birthday())
 
@@ -336,7 +336,7 @@ if __name__ == "__main__":
 
     # # # Знаходження та редагування телефону для John
     # john = book.find("John")
-    # # print(john)
+    # print(john)
     # john.edit_phone("023 456 78 90", "011 222 33 33")
     # # print(john)
     # try:
@@ -348,9 +348,9 @@ if __name__ == "__main__":
     # except:
     #     print("Wrong nomber for chandging")
     # print(john)
-    # john.remove_phone("011 222 33 3")
+    # john.remove_phone("011222333")
     # print(john)
-    # john.remove_phone("011 222 33 33")
+    # john.remove_phone("0112223333")
     # print(john)
     # Виведення: Contact name: John, phones: 1112223333; 5555555555
 
@@ -362,7 +362,7 @@ if __name__ == "__main__":
     # found_phone = john.find_phone("+385(5)")
     # print(f"{john.name}: {found_phone}")  # Виведення: 5555555555
 
-    # # # Видалення запису Jorjy4
+    # # Видалення запису Jorjy4
     # book.delete("Jorjy4")
 
     # Jorjy4 = book.find("Jorjy4")

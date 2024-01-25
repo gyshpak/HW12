@@ -1,6 +1,7 @@
 # from pathlib import Path
 # import bot_helper.address_book as book
 import address_book as book
+from io_class import *
 
 def input_error(func):
     def inner(my_book, val):
@@ -70,7 +71,7 @@ def handler_delete_phone(my_book, list_):
     return f"Phone {list_[1]} of user {list_[0].capitalize()} successfully deleted"
 
 def handler_delete_user(my_book, list_):
-    print(list_[0].capitalize())
+    # print(list_[0].capitalize())
     my_book.delete(list_[0].capitalize())
     return f"User {list_[0].capitalize()} successfully deleted"
 
@@ -141,7 +142,10 @@ def parser_command(my_book, command):
 
 
 def main():
-    print(handler_help())
+    cli = CLI_IN_OUT()
+
+    cli.print(handler_help())
+
     # file_name_p = "bot_helper\\book_pickle.bin"
     file_name_j = "bot_helper\\book_json.json"
     # file_name_j = Path("E:\pyton_proj\Go-IT\\bot_helper\\bot_helper\\book_json.json")
@@ -150,13 +154,13 @@ def main():
     # my_book = my_book_p.load_from_file_pickle(file_name_p) 
     my_book = my_book_j.load_from_file_json(file_name_j)
     while True:
-        command = input("please enter command ").lower()
+        command = cli.input("please enter command ")   #.lower()
         ret_rezault = parser_command(my_book, command)
         if ret_rezault:
-            print(ret_rezault)
+            cli.print(ret_rezault)
             if ret_rezault == "Good bye!":
                 # my_book.save_to_file_pickle(file_name_p)
-                my_book.save_to_file_json(file_name_j)
+                # my_book.save_to_file_json(file_name_j)
                 exit()
 
         
