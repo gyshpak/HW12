@@ -1,8 +1,6 @@
 from collections import UserDict
 from datetime import date
 from re import match
-import pickle
-import json
 
 
 class WrongBirthday(Exception):
@@ -218,21 +216,20 @@ class AddressBook(UserDict):
                 iter += 1
             if len(for_return) == self.qua_for_iter:
                 break
-        # return for_return
         return f"{'; '.join(i for i in for_return)} \n"
 
     def __iter__(self):
         return self
     
-    def save_to_file_pickle(self, file_name):
-        with open(file_name, 'wb') as file:
-            pickle.dump(self, file)
+    # def save_to_file_pickle(self, file_name):
+        # with open(file_name, 'wb') as file:
+        #     pickle.dump(self, file)
     
-    def load_from_file_pickle(self, file_name):
-        with open(file_name, 'rb') as file:
-            return pickle.load(file)
+    # def load_from_file_pickle(self, file_name):
+        # with open(file_name, 'rb') as file:
+        #     return pickle.load(file)
         
-    def save_to_file_json(self, file_name):
+    def save_to_file_json(self):
         data = {}
         dict_phones = {}
         list_phones = []
@@ -246,13 +243,14 @@ class AddressBook(UserDict):
                 data[name_i] = [dict_phones]
             list_phones = []
             dict_phones = {}
-        with open(file_name, 'w') as file:
-            json.dump(data, file)
+        return data
+        # with open(file_name, 'w') as file:
+        #     json.dump(data, file)
 
-    def load_from_file_json(self, file_name):
-        data = None
-        with open(file_name, 'r') as file:
-            data = json.load(file)
+    def load_from_file_json(self, data=None):
+        # data = None
+        # with open(file_name, 'r') as file:
+        #     data = json.load(file)
         ret_book = self
         for j_name, j_records in data.items():
             if len(j_records) == 2:

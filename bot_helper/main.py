@@ -1,5 +1,3 @@
-# from pathlib import Path
-# import bot_helper.address_book as book
 import address_book as book
 from io_class import *
 
@@ -71,7 +69,6 @@ def handler_delete_phone(my_book, list_):
     return f"Phone {list_[1]} of user {list_[0].capitalize()} successfully deleted"
 
 def handler_delete_user(my_book, list_):
-    # print(list_[0].capitalize())
     my_book.delete(list_[0].capitalize())
     return f"User {list_[0].capitalize()} successfully deleted"
 
@@ -143,24 +140,40 @@ def parser_command(my_book, command):
 
 def main():
     cli = CLI_IN_OUT()
+    json_io = JSON_IN_OUT()
+    pickle_io = PICKLE_IN_OUT()
 
     cli.print(handler_help())
 
-    # file_name_p = "bot_helper\\book_pickle.bin"
-    file_name_j = "bot_helper\\book_json.json"
-    # file_name_j = Path("E:\pyton_proj\Go-IT\\bot_helper\\bot_helper\\book_json.json")
-    # my_book_p = book.AddressBook()
-    my_book_j = book.AddressBook()
-    # my_book = my_book_p.load_from_file_pickle(file_name_p) 
-    my_book = my_book_j.load_from_file_json(file_name_j)
+    while True:
+        mode = cli.input("Choose mode for work:\n 1 - pickle file \n 2 - json file\n")
+        if mode == "1":
+            file_name = "bot_helper\\book_pickle.bin"
+            break
+        elif mode == "2":
+            file_name = "bot_helper\\book_json.json"
+            break
+        else:
+            cli.print("wrong choose, try again")
+    
+    my_book = book.AddressBook()
+    if mode == "1":
+        my_book = pickle_io.input(file_name)
+    else:
+        data = json_io.input(file_name)
+        my_book = my_book.load_from_file_json(data)
+
     while True:
         command = cli.input("please enter command ")   #.lower()
         ret_rezault = parser_command(my_book, command)
         if ret_rezault:
             cli.print(ret_rezault)
             if ret_rezault == "Good bye!":
-                # my_book.save_to_file_pickle(file_name_p)
-                # my_book.save_to_file_json(file_name_j)
+                if mode == "1":
+                    pickle_io.print(file_name, my_book)
+                else:
+                    data = my_book.save_to_file_json()
+                    json_io.print(file_name, data)
                 exit()
 
         
