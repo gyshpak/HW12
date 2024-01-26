@@ -1,5 +1,5 @@
-import address_book as book
-from io_class import *
+import bot_helper.address_book as book
+from bot_helper.io_class import *
 
 def input_error(func):
     def inner(my_book, val):
