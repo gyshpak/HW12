@@ -1,5 +1,9 @@
-import bot_helper.address_book as book
-from bot_helper.io_class import *
+# import bot_helper.address_book as book
+# from bot_helper.io_class import *
+
+import address_book as book
+from io_class import *
+
 
 def input_error(func):
     def inner(my_book, val):
@@ -148,10 +152,12 @@ def main():
     while True:
         mode = cli.input("Choose mode for work:\n 1 - pickle file \n 2 - json file\n")
         if mode == "1":
-            file_name = "bot_helper\\book_pickle.bin"
+            # file_name = "bot_helper\\book_pickle.bin"
+            file_name = "bot_helper/book_pickle.bin"
             break
         elif mode == "2":
-            file_name = "bot_helper\\book_json.json"
+            # file_name = "bot_helper\\book_json.json"
+            file_name = "bot_helper/book_json.json"
             break
         else:
             cli.print("wrong choose, try again")
